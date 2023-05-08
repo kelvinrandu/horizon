@@ -31,14 +31,28 @@ import Notifications from 'views/admin/profile/components/Notifications'
 import Projects from 'views/admin/profile/components/Projects'
 import Storage from 'views/admin/profile/components/Storage'
 import Upload from 'views/admin/profile/components/Upload'
-
+import fsPromises from "fs/promises";
+import path from "path";
 // Assets
 import banner from 'img/auth/banner.png'
 import avatar from 'img/avatars/avatar4.png'
 
-export default function ProfileOverview () {
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), "data.json");
+  // Read the json file
+  const jsonData = await fsPromises.readFile(filePath);
+  // Parse data as json
+  const routesData = JSON.parse(jsonData);
+  
+  console.log("data", routesData);
+return {
+  props: { routesData }, // will be passed to the page component as props
+};
+} 
+
+export default function ProfileOverview ({routesData}) {
   return (
-    <AdminLayout>
+    <AdminLayout  routesData={routesData}>
       <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
         {/* Main Fields */}
         <Grid

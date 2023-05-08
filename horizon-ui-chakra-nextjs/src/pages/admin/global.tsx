@@ -31,7 +31,7 @@ return {
   props: { routesData }, // will be passed to the page component as props
 };
 } 
-export default function DataTables ({routesData}) {
+export default function Global ({routesData}) {
   return (
     <AdminLayout routesData={routesData}>
       <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>

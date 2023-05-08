@@ -53,21 +53,35 @@ import {
   columnsDataComplex,
   TableData
 } from 'views/admin/default/variables/columnsData'
+import fsPromises from "fs/promises";
 import tableDataCheck from 'views/admin/default/variables/tableDataCheck.json'
 import tableDataComplex from 'views/admin/default/variables/tableDataComplex.json'
 import { isWindowAvailable } from 'utils/navigation'
 import AdminLayout from 'layouts/admin'
 import { Image } from 'components/image/Image'
+import path from "path";
 import Usa from 'img/dashboards/usa.png'
 
-export default function UserReports () {
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), "data.json");
+  // Read the json file
+  const jsonData = await fsPromises.readFile(filePath);
+  // Parse data as json
+  const routesData = JSON.parse(jsonData);
+  
+  console.log("data", routesData);
+return {
+  props: { routesData }, // will be passed to the page component as props
+};
+} 
+export default function UserReports ({routesData}) {
   // Chakra Color Mode
 
   const brandColor = useColorModeValue('brand.500', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
 
   return (
-    <AdminLayout>
+    <AdminLayout  routesData={routesData} >
       <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
         <>
           <SimpleGrid

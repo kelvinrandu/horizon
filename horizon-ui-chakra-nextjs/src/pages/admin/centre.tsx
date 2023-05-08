@@ -74,7 +74,7 @@ return {
   props: { routesData }, // will be passed to the page component as props
 };
 } 
-export default function NftMarketplace ({routesData}) {
+export default function Centre({routesData}) {
   // Chakra Color Mode
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorBrand = useColorModeValue('brand.500', 'white')

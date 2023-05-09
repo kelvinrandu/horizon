@@ -20,27 +20,37 @@
 
 */
 
-import React from 'react'
+import React,{useEffect,useState} from "react";
+import { useRouter } from 'next/router'
 
 // Chakra imports
 import {
   Box,
   Button,
   Flex,
+  Icon,
   Grid,
   Text,
   useColorModeValue,
   SimpleGrid,
   Link
 } from '@chakra-ui/react'
+import IconBox from "components/icons/IconBox";
+import MiniStatistics from "components/card/MiniStatistics";
 
 // Custom components
 import Banner from 'views/admin/marketplace/components/Banner'
+
 import TableTopCreators from 'views/admin/marketplace/components/TableTopCreators'
 import HistoryItem from 'views/admin/marketplace/components/HistoryItem'
 import NFT from 'components/card/NFT'
 import Card from 'components/card/Card'
-
+import {
+  MdAddTask,
+  MdAttachMoney,
+  MdBarChart,
+  MdFileCopy,
+} from "react-icons/md";
 // Assets
 import Nft1 from 'img/nfts/Nft1.png'
 import Nft2 from 'img/nfts/Nft2.png'
@@ -59,29 +69,71 @@ import { tableColumnsTopCreators } from 'views/admin/marketplace/variables/table
 import AdminLayout from 'layouts/admin'
 import { TableData } from 'views/admin/default/variables/columnsData'
 import NextLink from 'next/link'
+import Papa from 'papaparse';
 
 
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), "data.json");
+  const csvPath = path.join(process.cwd(), "csv/list.csv");
   // Read the json file
   const jsonData = await fsPromises.readFile(filePath);
+  const csvData = await fsPromises.readFile(csvPath,'utf8');
   // Parse data as json
   const routesData = JSON.parse(jsonData);
+  let vocab = {};
+  // const newArray = Papa.parse(csvData, { header: true }).data.forEach((row) => {
+  //   vocab[row.word] = row.definition;
+  // });
+  const newArray =Papa.parse(csvData, {
+    header: true,
+    complete: results => {
+      // setParsedCsvData(results.data)
+      // console.log('data',results.data)
+    },
+  });
   
   console.log("data", routesData);
 return {
-  props: { routesData }, // will be passed to the page component as props
+  props: { routesData ,newArray}, // will be passed to the page component as props
 };
 } 
-export default function List({routesData}) {
+export default function List({routesData,newArray}:any) {
   // Chakra Color Mode
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorBrand = useColorModeValue('brand.500', 'white')
+  const [tiles,setTiles] = useState(newArray.data)
   return (
-    <AdminLayout routesData={routesData} >
+    <AdminLayout  title={'list'} routesData={routesData} >
       <Box pt={{ base: '180px', md: '80px', xl: '80px' }}>
         {/* Main Fields */}
+        <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
+            gap="20px"
+            mb="20px"
+          >
+             {tiles.map((tile)=><>      {tile[0]}                 <MiniStatistics
+                          startContent={
+                            <IconBox
+                              w="56px"
+                              h="56px"
+                              // bg={boxBg}
+                              icon={
+                                <Icon
+                                  w="32px"
+                                  h="32px"
+                                  as={MdBarChart}
+                                  // color={brandColor}
+                                />
+                              }
+                            />
+                          }
+                          name={tile.Title}
+                          value={tile.data}
+                        /></>)}
+
+
+          </SimpleGrid>
         <Grid
           mb='20px'
           gridTemplateColumns={{ xl: 'repeat(3, 1fr)', '2xl': '1fr 0.46fr' }}

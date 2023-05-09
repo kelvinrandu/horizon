@@ -18,6 +18,7 @@ export default function AdminNavbar (props: {
   secondary: boolean
   message: string | boolean
   brandText: string
+  title: string
   logoText: string
   fixed: boolean
   onOpen: (...args: any[]) => any
@@ -35,7 +36,7 @@ export default function AdminNavbar (props: {
     }
   })
 
-  const { secondary, message, brandText } = props
+  const { secondary, message, brandText,title } = props
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let mainText = useColorModeValue('navy.700', 'white')
@@ -122,7 +123,7 @@ export default function AdminNavbar (props: {
 
             <BreadcrumbItem color={secondaryText} fontSize='sm'>
               <BreadcrumbLink href='#' color={secondaryText}>
-                {brandText}
+               { title}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
@@ -144,7 +145,7 @@ export default function AdminNavbar (props: {
               boxShadow: 'none'
             }}
           >
-            {brandText}
+          { title}
           </Link>
         </Box>
         <Box ms='auto' w={{ sm: '100%', md: 'unset' }}>

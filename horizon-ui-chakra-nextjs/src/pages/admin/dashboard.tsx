@@ -8,13 +8,12 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
+import React,{useEffect,useState} from "react";
 // Assets
 // Custom components
 import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
-import React,{useEffect,useState} from "react";
-import { useRouter } from 'next/router'
 import {
   MdAddTask,
   MdAttachMoney,
@@ -43,13 +42,14 @@ import path from "path";
 import Usa from "img/dashboards/usa.png";
 import Papa from 'papaparse';
 
+import { AnyARecord } from "dns";
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), "data.json");
-  const csvPath = path.join(process.cwd(), "csv/dashboard.csv");
+    const csvPath = path.join(process.cwd(), "csv/dashboard.csv");
   // Read the json file
   const jsonData = await fsPromises.readFile(filePath);
-  const csvData = await fsPromises.readFile(csvPath,'utf8');
+    const csvData = await fsPromises.readFile(csvPath,'utf8');
   // Parse data as json
   const routesData = JSON.parse(jsonData);
   let vocab = {};
@@ -63,26 +63,22 @@ export async function getStaticProps() {
       // console.log('data',results.data)
     },
   });
-
+  console.log("data", routesData);
   return {
-    props: { routesData ,newArray}, // will be passed to the page component as props
+    props: { routesData,newArray }, // will be passed to the page component as props
   };
 }
-export default function Home({ routesData,newArray }:any) {
-  const Router = useRouter()
-  const [tiles,setTiles] = useState(newArray.data)
-  useEffect(() => {
-    // Router.push('/admin/dashbaord')
-  })
-console.log('tiles',tiles)
-tiles.map((tile)=>console.log("each",tile.Title))
-
+export default function Dashboard({ routesData,newArray }:any) {
+  // useEffect(() => {
+  //   Router.push('/admin')
+  // })
+   const [tiles,setTiles] = useState(newArray.data)
+  console.log("aa", routesData);
   return (
-    <AdminLayout  title={''}routesData={routesData}>
+    <AdminLayout title={'dashboard'} routesData={routesData}>
       <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
         <>
-       
-          <SimpleGrid
+           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
             gap="20px"
             mb="20px"

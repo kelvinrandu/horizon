@@ -16,6 +16,7 @@ import {
 
 interface DashboardLayoutProps extends PropsWithChildren {
   [x: string]: any
+  title:string
 }
 
 // Custom Chakra theme

@@ -4,20 +4,24 @@
             "name": "Dashboard",
             "layout": "/admin",
             "path": "/",
-            "content": "This is the full content of post 1"
+            "content": "This is the full content of post 1",
+            "json_file":"dashboard.json"
         },
         {
             "id": 2,
             "name": "Centre de distribution",
             "layout": "/admin",
             "path": "/centre",
+             "json_file":"centre.json",
             "content": "This is the full content of post 1"
         },
         {
             "id": 3,
             "name": "Products",
             "layout": "/admin",
+            "":"",
             "path": "/products",
+             "json_file":"products.json",
             "content": "This is the full content of post 2"
         },
         {
@@ -25,6 +29,7 @@
             "name": "Global products",
             "path": "/global",
             "layout": "/admin",
+             "json_file":"global.json",
             "content": "This is the full content of post 3"
         },
         {
@@ -32,6 +37,7 @@
             "name": "List Distribution",
             "path": "/list",
             "layout": "/admin",
+             "json_file":"list.json",
             "content": "This is the full content of post 4"
         }
     ]

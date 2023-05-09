@@ -19,6 +19,7 @@
     "framer-motion": "^4.1.17",
     "fs.promises": "^0.1.2",
     "next": "^12.2.5",
+    "papaparse": "^5.4.1",
     "react": "^17.0.2",
     "react-apexcharts": "^1.4.0",
     "react-calendar": "^3.7.0",
@@ -53,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-    "browser": {
+  "browser": {
     "fs": false,
     "os": false,
     "path": false

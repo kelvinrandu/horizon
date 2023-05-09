@@ -72,7 +72,7 @@ export default function Home({ routesData,newArray }:any) {
   const Router = useRouter()
   const [tiles,setTiles] = useState(newArray.data)
   useEffect(() => {
-    // Router.push('/admin/dashbaord')
+    Router.push('/admin/dashboard')
   })
 console.log('tiles',tiles)
 tiles.map((tile)=>console.log("each",tile.Title))

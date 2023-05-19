@@ -361,6 +361,7 @@ export const lineChartDataTotalSpent = [
     data: [30, 40, 24, 46, 20, 46],
   },
 ];
+const categories=["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"]
 
 export const lineChartOptionsTotalSpent: ApexOptions = {
   chart: {
@@ -404,7 +405,8 @@ export const lineChartOptionsTotalSpent: ApexOptions = {
   },
   xaxis: {
     // type: "numeric",
-    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    // categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    categories: categories,
     labels: {
       style: {
         colors: "#A3AED0",

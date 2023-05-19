@@ -12,7 +12,9 @@ import { RiArrowUpSFill } from 'react-icons/ri';
 import { lineChartDataTotalSpent, lineChartOptionsTotalSpent } from 'variables/charts';
 
 export default function TotalSpent(props: { [x: string]: any }) {
+	const { line1,line2 } = props;
 	const { ...rest } = props;
+
 
 	// Chakra Color Mode
 
@@ -85,7 +87,7 @@ export default function TotalSpent(props: { [x: string]: any }) {
 					</Flex>
 				</Flex>
 				<Box minH='260px' minW='75%' mt='auto'>
-					<LineChart chartData={lineChartDataTotalSpent} chartOptions={lineChartOptionsTotalSpent} />
+					<LineChart line1={line1} line2={line2}  chartData={lineChartDataTotalSpent} chartOptions={lineChartOptionsTotalSpent} />
 				</Box>
 			</Flex>
 		</Card>

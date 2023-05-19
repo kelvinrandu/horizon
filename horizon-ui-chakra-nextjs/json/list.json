@@ -1,0 +1,52 @@
+[
+  {
+    "title": "List",
+    "table_wigdet_row": 3,
+    "table_wigdet_column": 4,
+    "widget1": {
+      "Type": "Graph",
+      "Row_position": 1,
+      "Column_position": 1,
+      "Selection_data": {
+        "Month": {
+          "line1": "1line1.csv",
+          "line2": "1line2.csv"
+        },
+        "Year": {
+          "line1": "1line1_year.csv",
+          "line2": "1line2_year.csv"
+        }
+      }
+    },
+    "widget2": {
+      "Type": "Graph",
+      "Row_position": 1,
+      "Column_position": 1,
+      "Selection_data": {
+        "Month": {
+          "line1": "2line1.csv",
+          "line2": "2line2.csv"
+        },
+        "Year": {
+          "line1": "2line1_year.csv",
+          "line2": "2line2_year.csv"
+        }
+      }
+    },
+    "widget3": {
+      "Type": "Graph",
+      "Row_position": 1,
+      "Column_position": 1,
+      "Selection_data": {
+        "Month": {
+          "line1": "3line1.csv",
+          "line2": "3line2.csv"
+        },
+        "Year": {
+          "line1": "3line1_year.csv",
+          "line2": "3line2_year.csv"
+        }
+      }
+    }
+  }
+]

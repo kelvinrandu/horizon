@@ -5,6 +5,8 @@ import {
   FormLabel,
   Icon,
   Select,
+  Grid,
+  GridItem,
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -63,25 +65,25 @@ export async function getStaticProps() {
 
   const newArray = Papa.parse(csvData, {
     header: true,
-    complete: (results) => {
-
-    },
+    complete: (results) => {},
   });
   const line1MonthArray = Papa.parse(line1Data, {
     header: true,
-    complete: (results) => {
-
-    },
+    complete: (results) => {},
   });
   const line2MonthArray = Papa.parse(line2Data, {
     header: true,
-    complete: (results) => {
-
-    },
+    complete: (results) => {},
   });
 
   return {
-    props: { routesData, newArray, _dashboardData ,line1MonthArray,line2MonthArray}, // will be passed to the page component as props
+    props: {
+      routesData,
+      newArray,
+      _dashboardData,
+      line1MonthArray,
+      line2MonthArray,
+    }, // will be passed to the page component as props
   };
 }
 export default function Dashboard({
@@ -93,19 +95,21 @@ export default function Dashboard({
 }: any) {
   const [tiles, setTiles] = useState(newArray.data);
 
-  const line1:any[] =[]
-  line1MonthArray.data.map((month:any)=>{
-    line1.push(parseInt(month?.data))
-
-  })
+  const line1: any[] = [];
+  line1MonthArray.data.map((month: any) => {
+    line1.push(parseInt(month?.data));
+  });
   line1.splice(line1.length - 1);
 
-  const line2:any[] =[]
-  line2MonthArray.data.map((month:any)=>{
-    line2.push(parseInt(month?.data))
-
-  })
+  const line2: any[] = [];
+  line2MonthArray.data.map((month: any) => {
+    line2.push(parseInt(month?.data));
+  });
   line2.splice(line1.length - 1);
+  console.log("_dashboardData", _dashboardData.widgets);
+  _dashboardData.widgets.map((widget: any) => {
+    console.log("widget", widget);
+  });
 
   return (
     <AdminLayout title={_dashboardData?.title} routesData={routesData}>
@@ -143,11 +147,49 @@ export default function Dashboard({
             ))}
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
-            <TotalSpent line1={line1} line2={line2} />
-            <WeeklyRevenue />
-          </SimpleGrid>
+          <Grid
+            h="200px"
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeat(5, 1fr)"
+            gap={4}
+          >
+            {_dashboardData.widgets.map((widget: any) => {
+              return (
+                <>
+                  <GridItem colSpan={2} bg="papayawhip" />
+                </>
+              );
+            })}
 
+            {/* <GridItem rowSpan={2} colSpan={1} bg="tomato" />
+            <GridItem colSpan={2} bg="papayawhip" />
+            <GridItem colSpan={2} bg="papayawhip" />
+            <GridItem colSpan={4} bg="tomato" /> */}
+          </Grid>
+
+          <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
+            {/* <TotalSpent line1={line1} line2={line2} />
+            <WeeklyRevenue /> */}
+            {_dashboardData.widgets.map((widget: any) => {
+              if (widget.Type == "line") {
+                return (
+                  <>
+                    <TotalSpent
+                      data={widget.Selection_data}
+                      line1={line1}
+                      line2={line2}
+                    />
+                  </>
+                );
+              } else {
+                return (
+                  <>
+                    <WeeklyRevenue />
+                  </>
+                );
+              }
+            })}
+          </SimpleGrid>
         </>
       </Box>
     </AdminLayout>

@@ -10,10 +10,14 @@ import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md';
 // Assets
 import { RiArrowUpSFill } from 'react-icons/ri';
 import { lineChartDataTotalSpent, lineChartOptionsTotalSpent } from 'variables/charts';
+import fsPromises from "fs/promises";
+import path from "path";
 
 export default function TotalSpent(props: { [x: string]: any }) {
-	const { line1,line2 } = props;
+	const line1CsvPath = path.join(process.cwd(), "csv/dashboard/line1.csv");
+	const { line1, line2, data } = props;
 	const { ...rest } = props;
+	console.log("line data -->", data);
 
 
 	// Chakra Color Mode
